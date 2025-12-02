@@ -1,3 +1,11 @@
 from django.shortcuts import render
+from .models import Task
 
-# Create your views here.
+def task_list(request):
+    completed_tasks = Task.objects.filter(is_completed=True)
+    incomplete_tasks = Task.objects.filter(is_completed=False)
+
+    return render(request, 'tasks/task_list.html',
+                  {'completed_tasks': completed_tasks,
+                   'incomplete_tasks': incomplete_tasks}
+                  )

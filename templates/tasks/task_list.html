@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Tasks</h1>
+
+  <h2>Not Completed</h2>
+  <ul>
+    {% for task in incomplete_tasks %}
+      <li>
+        {{ task.name }} | {{ task.task_type }} | {{ task.priority }} | {{ task.is_completed }}
+      </li>
+    {% empty %}
+      No incomplete tasks.
+    {% endfor %}
+  </ul>
+
+  <h2>Completed</h2>
+  <ul>
+    {% for task in completed_tasks %}
+      <li>
+        {{ task.name }} | {{ task.task_type }} | {{ task.priority }} | {{ task.is_completed }}
+      </li>
+    {% empty %}
+      No completed tasks.
+    {% endfor %}
+  </ul>
+{% endblock %}
