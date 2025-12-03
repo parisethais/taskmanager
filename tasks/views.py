@@ -11,3 +11,9 @@ def task_list(request):
                   {'completed_tasks': completed_tasks,
                    'incomplete_tasks': incomplete_tasks}
                   )
+
+@login_required
+def task_detail(request, pk):
+    task = Task.objects.get(pk=pk)
+    return render(request, 'tasks/task_detail.html', {'task': task})
+
