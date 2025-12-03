@@ -103,6 +103,7 @@ project_root/
 
 ## Instalação do projeto
 
+```bash
 # 1. Clone o repositório
 git clone <REPO_URL>
 cd <REPO_NAME>
@@ -127,3 +128,5 @@ python manage.py createsuperuser
 
 # 7. Inicie o servidor
 python manage.py runserver
+```
+
