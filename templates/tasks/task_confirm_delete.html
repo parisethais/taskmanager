@@ -1,13 +1,31 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>Delete Task</h1>
+<div class="tasks-section py-5">
+  <div class="container" style="max-width: 720px;">
+    <div class="card shadow-sm border-0">
+      <div class="card-body">
+        <h1 class="h4 mb-3">Delete task</h1>
 
-  <p>Are you sure you want to delete {{ task.name }}?</p>
+        <p class="mb-2">
+          Are you sure you want to delete
+          <strong>{{ task.name }}</strong>?
+        </p>
+        <p class="text-muted mb-4">
+          This action cannot be undone.
+        </p>
 
-  <form method="post">
-    {% csrf_token %}
-    <button type="submit">Confirm delete</button>
-    <a href="{% url 'tasks:task_detail' task.pk %}">Cancel</a>
-  </form>
+        <form method="post" class="d-flex justify-content-between">
+          {% csrf_token %}
+          <a href="{% url 'tasks:task_detail' task.pk %}" class="btn btn-outline-secondary">
+            Cancel
+          </a>
+          <button type="submit" class="btn btn-danger">
+            Delete
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}

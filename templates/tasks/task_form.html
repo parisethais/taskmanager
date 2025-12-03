@@ -1,12 +1,59 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>{{ form.instance.pk|yesno:"Update Task,Create Task" }}</h1>
+  <section class="page-section">
+    <div class="form-page-inner">
 
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
+      <h1 class="page-title">
+        {% if object %}
+          Edit task
+        {% else %}
+          Create task
+        {% endif %}
+      </h1>
 
-    <button type="submit">Save</button>
-  </form>
+      <div class="card form-card shadow-sm">
+        <div class="card-body">
+          <form method="post">
+            {% csrf_token %}
+
+            {{ form.non_field_errors }}
+
+            {% for field in form %}
+              <div class="mb-3">
+                <label class="form-label" for="{{ field.id_for_label }}">
+                  {{ field.label }}
+                </label>
+
+                {{ field }}
+
+                {% if field.help_text %}
+                  <small class="form-text text-muted">
+                    {{ field.help_text }}
+                  </small>
+                {% endif %}
+
+                {% for error in field.errors %}
+                  <div class="text-danger small">
+                    {{ error }}
+                  </div>
+                {% endfor %}
+              </div>
+            {% endfor %}
+
+            <div class="d-flex justify-content-between align-items-center mt-4">
+              <a href="{% url 'tasks:task_list' %}" class="btn btn-outline-secondary">
+                Cancel
+              </a>
+
+              <button type="submit" class="btn btn-primary">
+                {% if object %}Save{% else %}Create{% endif %}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </section>
 {% endblock %}

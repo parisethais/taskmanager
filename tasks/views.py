@@ -5,13 +5,14 @@ from .forms import TaskForm
 
 @login_required
 def task_list(request):
-    completed_tasks = Task.objects.filter(is_completed=True, assignees=request.user)
-    incomplete_tasks = Task.objects.filter(is_completed=False, assignees=request.user)
+    completed_tasks = Task.objects.filter(is_completed=True)
+    incomplete_tasks = Task.objects.filter(is_completed=False)
 
-    return render(request, 'tasks/task_list.html',
-                  {'completed_tasks': completed_tasks,
-                   'incomplete_tasks': incomplete_tasks}
-                  )
+    context = {
+        "completed_tasks": completed_tasks,
+        "incomplete_tasks": incomplete_tasks,
+    }
+    return render(request, "tasks/task_list.html", context)
 
 @login_required
 def task_detail(request, pk):
@@ -36,7 +37,7 @@ def task_update(request, pk):
         form = TaskForm(request.POST, instance=task)
         if form.is_valid():
             form.save()
-            return redirect('tasks:task_list')
+            return redirect('tasks:task_detail', pk=task.pk)
     else:
         form = TaskForm(instance=task)
     return render(request, 'tasks/task_form.html', {'form': form})

@@ -14,4 +14,8 @@ class TaskForm(forms.ModelForm):
             'tags',
             'assignees',
             'is_completed']
+        widgets = {
+            "deadline": forms.DateInput(attrs={'type': 'date'}),
+            "is_completed": forms.CheckboxInput(),
+        }
 
