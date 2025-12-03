@@ -9,5 +9,9 @@
     <p>Is completed: {{ task.is_completed }}</p>
     <p>Deadline: {{ task.deadline }}</p>
     <p>Description: {{ task.description }}</p>
-
+    <a href="{% url 'tasks:task_update' task.pk %}">Edit</a>
+    |
+    <a href="{% url 'tasks:task_delete' task.pk %}">Delete</a>
+    |
+    <a href="{% url 'tasks:task_list' %}">Back to tasks</a>
 {% endblock %}
