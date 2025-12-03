@@ -50,55 +50,55 @@ Um sistema simples de gerenciamento de tarefas com autenticação, atribuição 
 - Django templates
 
 ---
-
+```md
 ## Estrutura do projeto
 
 project_root/
-│
-├── accounts/                       # App responsável por usuários (Workers)
-│   ├── models.py                   # Worker customizado + Position
-│   ├── views.py                    # Listagem e detalhe de workers
-│   ├── urls.py                     # Rotas do app accounts
-│   ├── admin.py                    # Integração do Worker com o Django Admin
-│   └── migrations/                 # Migrações do app accounts
-│
-├── tasks/                          # App principal de tarefas
-│   ├── models.py                   # Task, TaskType e Tag
-│   ├── views.py                    # List, Detail, Create, Update, Delete
-│   ├── forms.py                    # Form de criação/edição de tarefas
-│   ├── urls.py                     # Rotas do app tasks
-│   └── migrations/                 # Migrações do app tasks
-│
+|
+├── accounts/                      # App responsável por usuários (Workers)
+│   ├── models.py                  # Worker customizado + Position
+│   ├── views.py                   # Listagem e detalhe de workers
+│   ├── urls.py                    # Rotas do app accounts
+│   ├── admin.py                   # Integração do Worker com o Django Admin
+│   └── migrations/                # Migrações do app accounts
+|
+├── tasks/                         # App principal de tarefas
+│   ├── models.py                  # Task, TaskType e Tag
+│   ├── views.py                   # List, Detail, Create, Update, Delete
+│   ├── forms.py                   # Formulário de criação/edição de tarefas
+│   ├── urls.py                    # Rotas do app tasks
+│   └── migrations/                # Migrações do app tasks
+|
 ├── templates/
-│   ├── base.html                   # Template base com navbar e layout geral
-│   ├── registration/               # Templates de autenticação
+│   ├── base.html                  # Template base com navbar e layout geral
+│   ├── registration/              # Templates de autenticação
 │   │   └── login.html
-│   ├── accounts/                   # Templates de workers
+│   ├── accounts/                  # Templates de workers
 │   │   ├── worker_list.html
 │   │   └── worker_detail.html
-│   └── tasks/                      # Templates de tarefas
+│   └── tasks/                     # Templates de tarefas
 │       ├── task_list.html
 │       ├── task_detail.html
 │       ├── task_form.html
 │       └── task_confirm_delete.html
-│
+|
 ├── static/
 │   ├── css/
-│   │   └── custom.css              # Estilos personalizados
-│   └── screenshots/                # Imagens usadas exclusivamente no README
+│   │   └── custom.css             # Estilos personalizados
+│   └── screenshoots/              # Imagens usadas no README
 │       ├── task_list.png
 │       ├── task_detail.png
 │       ├── worker_list.png
 │       └── worker_detail.png
-│
-├── config/                         # Configuração principal do Django
+|
+├── config/                        # Configurações do Django
 │   ├── settings.py
 │   ├── urls.py
 │   └── wsgi.py
-│
-├── manage.py                       # Executável principal do Django
-└── requirements.txt                # Dependências do projeto
-
+|
+├── manage.py                      # Executável principal do Django
+└── requirements.txt               # Dependências do projeto
+```
 ---
 
 ## Instalação do projeto
