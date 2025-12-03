@@ -5,6 +5,13 @@
   <h1>{{ task.name }}</h1>
 
     <p>Type: {{ task.task_type }}</p>
+    <p>Tags:
+      {% for tag in task.tags.all %}
+        {{ tag.name }}
+      {% empty %}
+         No tags
+      {% endfor %}
+    </p>
     <p>Priority: {{ task.priority }}</p>
     <p>Is completed: {{ task.is_completed }}</p>
     <p>Deadline: {{ task.deadline }}</p>

@@ -8,7 +8,10 @@
     {% for task in incomplete_tasks %}
       <li>
         <a href="{% url 'tasks:task_detail' task.pk %}"> {{ task.name }}</a>
-        | {{ task.task_type }} | {{ task.priority }} | {{ task.is_completed }}
+        | {{ task.task_type }} | {{ task.priority }} | {{ task.is_completed }} | Tags:
+        {% for tag in task.tags.all %}
+          {{ tag.name }}
+        {% endfor %}
       </li>
     {% empty %}
       No incomplete tasks.
@@ -20,7 +23,10 @@
     {% for task in completed_tasks %}
       <li>
         <a href="{% url 'tasks:task_detail' task.pk %}"> {{ task.name }}</a>
-        | {{ task.task_type }} | {{ task.priority }} | {{ task.is_completed }}
+        | {{ task.task_type }} | {{ task.priority }} | {{ task.is_completed }} | Tags:
+        {% for tag in task.tags.all %}
+          {{ tag.name }}
+        {% endfor %}
       </li>
     {% empty %}
       No completed tasks.

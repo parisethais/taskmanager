@@ -11,6 +11,7 @@ class TaskForm(forms.ModelForm):
             'deadline',
             'priority',
             'task_type',
+            'tags',
             'assignees',
             'is_completed']
 
