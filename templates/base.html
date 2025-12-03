@@ -5,12 +5,70 @@
 <head>
   <meta charset="UTF-8">
   <title>Task Manager</title>
-</head>
-<body>
-  <div>
-    <header>Task Manager</header>
 
+  <!-- Material Kit / Bootstrap CSS -->
+  <link rel="stylesheet" href="{% static 'assets/css/material-kit.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+</head>
+<body class="bg-light">
+
+    <!-- NAVBAR -->
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="container d-flex justify-content-between align-items-center">
+
+      <!-- lado esquerdo: logo + links -->
+      <div class="d-flex align-items-center gap-4">
+        <a class="navbar-brand mb-0" href="{% url 'tasks:task_list' %}">
+          Task Manager
+        </a>
+
+        {% if user.is_authenticated %}
+          <ul class="navbar-nav flex-row gap-3">
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'tasks:task_list' %}">Tasks</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'accounts:worker_list' %}">Workers</a>
+            </li>
+
+            {# link do Django admin: só superuser enxerga #}
+            {% if user.is_superuser %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'admin:index' %}">admin</a>
+              </li>
+            {% endif %}
+          </ul>
+        {% endif %}
+      </div>
+
+      <!-- lado direito: usuário + logout -->
+      <ul class="navbar-nav navbar-actions flex-row">
+        {% if user.is_authenticated %}
+          <li class="nav-item navbar-user">
+            <span>Logged in as</span>
+            <strong>{{ user.username }}</strong>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-outline-light btn-sm logout-btn" href="{% url 'accounts:logout' %}">
+              LOGOUT
+            </a>
+          </li>
+        {% else %}
+          <li class="nav-item">
+            <a class="btn btn-outline-light btn-sm logout-btn" href="{% url 'accounts:login' %}">
+              LOGIN
+            </a>
+          </li>
+        {% endif %}
+      </ul>
+    </div>
+  </nav>
+
+
+  <!-- MAIN CONTENT -->
+  <main>
     {% block content %}{% endblock %}
-  </div>
+  </main>
+
 </body>
 </html>
