@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-section">
+  <div class="tasks-section-inner">
+
+    <!-- Cabeçalho: nome do worker + posição + voltar -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <div>
+        <h1 class="page-title mb-1">{{ worker.username }}</h1>
+        {% if worker.position %}
+          <p class="text-muted mb-0">{{ worker.position }}</p>
+        {% endif %}
+      </div>
+
+      <a href="{% url 'accounts:worker_list' %}" class="btn btn-outline-secondary btn-sm">
+        ← Back to workers
+      </a>
+    </div>
+
+    <!-- Cards lado a lado com tasks desse worker -->
+    <div class="row tasks-row">
+
+      <!-- Not completed -->
+      <div class="col-lg-6 mb-4">
+        <div class="card shadow-sm h-100">
+          <div class="card-header pb-0 pt-3">
+            <h5 class="mb-1">Not completed</h5>
+            <small class="text-muted">
+              {{ incomplete_tasks|length }} task{% if incomplete_tasks|length != 1 %}s{% endif %}
+            </small>
+          </div>
+          <div class="card-body">
+            {% if incomplete_tasks %}
+              {% for task in incomplete_tasks %}
+                <div class="mb-4 pb-3 border-bottom">
+                  <a href="{% url 'tasks:task_detail' task.pk %}"
+                     class="text-dark fw-bold d-block mb-1">
+                    {{ task.name }}
+                  </a>
+
+                  <div class="d-flex align-items-center text-muted small mb-2">
+                    <span>Type: {{ task.task_type }}</span>
+                    <span class="mx-1">•</span>
+                    <span class="me-2">Priority:</span>
+
+                    <span
+                      class="
+                        badge
+                        priority-badge
+                        {% if task.priority == 'low' %}
+                          priority-low
+                        {% elif task.priority == 'medium' %}
+                          priority-medium
+                        {% elif task.priority == 'high' %}
+                          priority-high
+                        {% elif task.priority == 'urgent' %}
+                          priority-urgent
+                        {% endif %}
+                      "
+                    >
+                      {{ task.priority|upper }}
+                    </span>
+                  </div>
+
+                  {% if task.tags.all %}
+                    {% for tag in task.tags.all %}
+                      <span class="badge tag-badge me-1">{{ tag.name }}</span>
+                    {% endfor %}
+                  {% else %}
+                    <span class="text-muted small">No tags</span>
+                  {% endif %}
+                </div>
+              {% endfor %}
+            {% else %}
+              <p class="text-muted mb-0">No incomplete tasks for this worker.</p>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+
+      <!-- Completed -->
+      <div class="col-lg-6 mb-4">
+        <div class="card shadow-sm h-100">
+          <div class="card-header pb-0 pt-3">
+            <h5 class="mb-1">Completed</h5>
+            <small class="text-muted">
+              {{ completed_tasks|length }} task{% if completed_tasks|length != 1 %}s{% endif %}
+            </small>
+          </div>
+          <div class="card-body">
+            {% if completed_tasks %}
+              {% for task in completed_tasks %}
+                <div class="mb-4 pb-3 border-bottom">
+                  <a href="{% url 'tasks:task_detail' task.pk %}"
+                     class="text-dark fw-bold d-block mb-1">
+                    {{ task.name }}
+                  </a>
+
+                  <div class="d-flex align-items-center text-muted small mb-2">
+                    <span>Type: {{ task.task_type }}</span>
+                    <span class="mx-1">•</span>
+                    <span class="me-2">Priority:</span>
+
+                    <span
+                      class="
+                        badge
+                        priority-badge
+                        {% if task.priority == 'low' %}
+                          priority-low
+                        {% elif task.priority == 'medium' %}
+                          priority-medium
+                        {% elif task.priority == 'high' %}
+                          priority-high
+                        {% elif task.priority == 'urgent' %}
+                          priority-urgent
+                        {% endif %}
+                      "
+                    >
+                      {{ task.priority|upper }}
+                    </span>
+                  </div>
+
+                  {% if task.tags.all %}
+                    {% for tag in task.tags.all %}
+                      <span class="badge tag-badge me-1">{{ tag.name }}</span>
+                    {% endfor %}
+                  {% else %}
+                    <span class="text-muted small">No tags</span>
+                  {% endif %}
+                </div>
+              {% endfor %}
+            {% else %}
+              <p class="text-muted mb-0">No completed tasks for this worker.</p>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+{% endblock %}

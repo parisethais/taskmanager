@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-section">
+  <div class="tasks-section-inner">
+
+    <div class="workers-header d-flex justify-content-between align-items-center mb-4">
+      <h1 class="page-title">Workers</h1>
+      <span class="text-muted small">
+        {{ workers|length }} worker{{ workers|length|pluralize }}
+      </span>
+    </div>
+
+    <div class="card shadow-sm">
+      <div class="card-body">
+        {% if workers %}
+          <ul class="list-unstyled mb-0">
+            {% for worker in workers %}
+              <li class="mb-2">
+                <a href="{% url 'accounts:worker_detail' worker.pk %}"
+                  class="worker-link fw-semibold text-decoration-none">
+                  {{ worker.get_full_name }}
+                </a>
+                {% if worker.position %}
+                  <span class="text-muted"> | {{ worker.position }}</span>
+                {% endif %}
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p class="text-muted mb-0">No workers yet.</p>
+        {% endif %}
+      </div>
+    </div>
+
+  </div>
+</section>
+{% endblock %}
