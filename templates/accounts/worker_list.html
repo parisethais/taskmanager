@@ -7,7 +7,7 @@
     <div class="workers-header d-flex justify-content-between align-items-center mb-4">
       <h1 class="page-title">Workers</h1>
       <span class="text-muted small">
-        {{ workers|length }} workers
+        {{ workers|length }} worker{{ workers|length|pluralize }}
       </span>
     </div>
 
@@ -19,7 +19,7 @@
               <li class="mb-2">
                 <a href="{% url 'accounts:worker_detail' worker.pk %}"
                   class="worker-link fw-semibold text-decoration-none">
-                  {{ worker.username }}
+                  {{ worker.get_full_name }}
                 </a>
                 {% if worker.position %}
                   <span class="text-muted"> | {{ worker.position }}</span>

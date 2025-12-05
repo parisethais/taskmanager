@@ -7,10 +7,12 @@ from tasks.models import Task
 
 User = get_user_model()
 
+
 @login_required
 def worker_list(request):
     workers = Worker.objects.all()
-    return render(request, 'accounts/worker_list.html', {'workers': workers})
+    return render(request, "accounts/worker_list.html", {"workers": workers})
+
 
 @login_required
 def worker_detail(request, pk):
@@ -28,6 +30,7 @@ def worker_detail(request, pk):
         },
     )
 
+
 def logout_view(request):
     logout(request)
-    return redirect('accounts:login')
+    return redirect("accounts:login")

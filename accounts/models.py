@@ -1,5 +1,5 @@
 from django.contrib.auth.models import AbstractUser
-from django.db import (models)
+from django.db import models
 
 
 class Position(models.Model):
@@ -15,7 +15,7 @@ class Worker(AbstractUser):
         on_delete=models.CASCADE,
         null=True,
         blank=True,
-        related_name='workers',
+        related_name="workers",
     )
 
     def __str__(self):

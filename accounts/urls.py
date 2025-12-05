@@ -10,9 +10,7 @@ urlpatterns = [
         LoginView.as_view(template_name="registration/login.html"),
         name="login",
     ),
-
     path("logout/", logout_view, name="logout"),
-
     path("workers/", worker_list, name="worker_list"),
     path("workers/<int:pk>/", worker_detail, name="worker_detail"),
 ]

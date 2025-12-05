@@ -6,8 +6,7 @@ admin.site.register(Position)
 
 
 class WorkerAdmin(UserAdmin):
-   fieldsets = UserAdmin.fieldsets + (
-       ("Position", {'fields': ('position',)}),
-   )
+    fieldsets = UserAdmin.fieldsets + (("Position", {"fields": ("position",)}),)
+
 
 admin.site.register(Worker, WorkerAdmin)
